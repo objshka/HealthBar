@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int _damageInstance;
-    private float _maxHealth = 100f;
+    [SerializeField] private float _currentHealth;
+    [SerializeField] private float _maxHealth;
     private float _minHealth = 0f;
     private float _health;
 
@@ -14,19 +14,19 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _health = 50;
+        _health = _currentHealth;
         HealthChanged?.Invoke(Health);
     }
 
-    public void Heal()
+    public void Heal(int damageInstance)
     {
-        _health = Math.Clamp(_health += _damageInstance, _minHealth, _maxHealth);
+        _health = Math.Clamp(_health + damageInstance, _minHealth, _maxHealth);
         HealthChanged?.Invoke(Health);
     }
 
-    public void Damage()
+    public void Damage(int damageInstance)
     {
-        _health = Math.Clamp(_health -= _damageInstance, _minHealth, _maxHealth);
+        _health = Math.Clamp(_health - damageInstance, _minHealth, _maxHealth);
         HealthChanged?.Invoke(Health);
     }
 }

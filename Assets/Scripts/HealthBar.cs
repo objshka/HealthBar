@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private Player Player;
+    [SerializeField] private Player _player;
 
     private Coroutine _coroutine;
 
@@ -13,12 +13,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.HealthChanged += OnHealthChanged;
+        _player.HealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        Player.HealthChanged -= OnHealthChanged;
+        _player.HealthChanged -= OnHealthChanged;
     }
 
     private void OnHealthChanged(float health)
@@ -34,7 +34,7 @@ public class HealthBar : MonoBehaviour
 
     private IEnumerator Changing(float health)
     {
-        while (Mathf.Abs(_slider.value - health) > .2f)
+        while (_slider.value != health)
         {
             _slider.value = Mathf.MoveTowards(_slider.value, health, _recoveryRate);
 
