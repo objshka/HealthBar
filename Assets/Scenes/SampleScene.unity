@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1708501737}
-  _player: {fileID: 1501589731}
+  Player: {fileID: 1501589731}
 --- !u!1 &2004752835
 GameObject:
   m_ObjectHideFlags: 0

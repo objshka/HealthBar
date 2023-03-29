@@ -5,31 +5,31 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private Player _player;
+    [SerializeField] private Player Player;
 
-    private Coroutine Coroutine;
+    private Coroutine _coroutine;
 
     private float _recoveryRate = 0.1f;
 
     private void OnEnable()
     {
-        _player.HealthChanged += OnHealthChanged;
+        Player.HealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        _player.HealthChanged -= OnHealthChanged;
+        Player.HealthChanged -= OnHealthChanged;
     }
 
     private void OnHealthChanged(float health)
     {
-        if (Coroutine != null)
+        if (_coroutine != null)
         {
-            StopCoroutine(Coroutine);
-            Coroutine = null;
+            StopCoroutine(_coroutine);
+            _coroutine = null;
         }
 
-        Coroutine = StartCoroutine(Changing(health));
+        _coroutine = StartCoroutine(Changing(health));
     }
 
     private IEnumerator Changing(float health)
